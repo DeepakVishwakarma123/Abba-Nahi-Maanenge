@@ -1,0 +1,54 @@
+Final Client PRD: "Abba Nahi Maanenge"
+1. Product Summary
+Project Name: "Abba Nahi Maanenge" Privacy Extension
+
+Target Delivery Window: 21 Days
+
+Core Objective: A browser extension that instantly masks private web-browsing sessions and wipes local session data with a single action when a user's privacy is suddenly compromised.
+
+2. Required Features (Client Scope)
+The Global Trigger: A keyboard shortcut command (e.g., Ctrl + Shift + Q) that activates the tool instantly from anywhere in the browser.
+
+The Wipe Mechanism: An automated command that clears the browser's past hour of cache, cookies, and download records.
+
+The Camouflage Redirect: Immediate closure of active tabs, instantly replaced by a clean, pre-determined educational or work-related homepage (such as GitHub, Wikipedia, or an Excel-like sheet).
+
+The Management Interface: A minimalist popup menu allowing the user to turn the tool on/off, customize their emergency destination link, and choose a camouflage profile.
+
+3. Tech Stack & Infrastructure
+Development Stack
+UI Components: Vanilla JavaScript, HTML5, and Tailwind CSS.
+
+Engine Integration: Standard Web Extensions Browser API.
+
+Hosting & Online Assets
+Distribution Hub: Chrome Web Store Developer Console.
+
+Product Landing Page: Hosted on Vercel or Netlify for instant load times.
+
+Web Identity: An unsuspecting, clean domain name (e.g., safeguardtab.com or quickworkspace.com) registered via Cloudflare.
+
+4. Project Roadmap & Milestones (21-Day Schedule)
+Milestone 1: Core Functionality (Days 1 – 5)
+Delivery: A background setup that successfully catches the keyboard command and forces a local session change.
+
+Milestone 2: Configuration Dashboard (Days 6 – 10)
+Delivery: A clean user interface enabling users to easily change target URLs and select preset themes.
+
+Milestone 3: Verification & Quality Phases (Days 11 – 15)
+Alpha Window (Days 11 – 12): Internal team validation ensuring the system reacts smoothly under heavy multi-tab usage.
+
+Beta Window (Days 13 – 15): Distribution to a closed group of 20 test users to check general usability and interface responsiveness.
+
+Milestone 4: Store Submission (Days 16 – 18)
+Delivery: Finalizing the required extension privacy policy document and submitting the package to the Chrome Web Store review pipeline.
+
+Milestone 5: Marketing Deployment & Handover (Days 19 – 21)
+Delivery: Publishing the live landing site and triggering the public promotional strategy.
+
+5. Go-To-Market & Growth Strategy
+Viral Content Loops: Creating short-form videos (Instagram Reels / YouTube Shorts) playing on relatable, high-anxiety Indian household situations using the iconic "Abba Nahi Maanenge" thematic audio.
+
+Organic Community Seeding: Demonstrating the speed of the tool via short GIF/video demonstrations across high-traffic community spaces like Reddit (r/me_irl, student forums, and gaming spaces).
+
+Targeted Search Visibility: Structuring the text copy on the landing page around specific privacy expressions to pull organic traffic from search engines naturally.
