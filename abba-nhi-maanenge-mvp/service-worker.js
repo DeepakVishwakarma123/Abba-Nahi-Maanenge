@@ -14,6 +14,18 @@
 //     }
 // )
 
+// the below code returns all active window and there info regarding tabs property and other thins
+
+let windowPromise=chrome.windows.getAll(
+{
+    populate:true,
+}
+)
+
+windowPromise.then(
+    (windowInfo) => console.log(windowInfo)
+).catch(() => console.error('there are some errors'))
+
 async function getCurrentTab(params) {
     let queryOptions={active:false,lastFocusedWindow:true}
     let tab=await chrome.tabs.query(queryOptions)
