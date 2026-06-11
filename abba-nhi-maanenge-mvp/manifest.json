@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Abba nhi Maanenge",
+  "version": "1.0.0",
+  "background": {
+    "service_worker": "service-worker.js",
+    "type":"module"
+  },
+  "permissions":["storage","tabs","activeTab"],
+  "commands": {
+    "panic-key": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "linux":"Ctrl+Shift+1"
+      },
+      "description": "Camoflage me"
+    },
+    "open":{
+       "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "linux":"Ctrl+Shift+2"
+      },
+      "description": "opne me"
+    }
+  }
+}
