@@ -32,6 +32,7 @@ async function getCurrentTab() {
 chrome.commands.onCommand.addListener((command) => {
   if(command==="panic-key")
   {
+    clearRecentHistory()
     GetallTab()
   }
 });
@@ -80,4 +81,18 @@ chrome.tabs.remove(
 )
 }
 
-
+async function clearRecentHistory()
+{   
+    // let dateObject=new Date()
+    //current time in milliseconds
+    let currentTime=Date.now()
+    let millisecondInhour=3600000
+    let pastHour=currentTime-millisecondInhour
+    let historyClear=await chrome.history.deleteRange(
+        {
+            startTime:pastHour,
+            endTime:currentTime
+        }
+    )
+    console.log("history clear status",historyClear)
+}
