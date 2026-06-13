@@ -14,27 +14,19 @@
 //     }
 // )
 
-// the below code returns all active window and there info regarding tabs property and other thins
 
-let windowPromise=chrome.windows.getAll(
-{
-    populate:true,
-}
-)
-
-windowPromise.then(
-    (windowInfo) => console.log(windowInfo)
-).catch(() => console.error('there are some errors'))
-
-async function getCurrentTab(params) {
-    let queryOptions={active:false,lastFocusedWindow:true}
-    let tab=await chrome.tabs.query(queryOptions)
-    console.log(tab);
-    
-    return tab
+async function getCurrentTab() {
+ let windowsInfo=await chrome.windows.getAll({populate:true})
+ let tabsInfoAcrossWindows=windowsInfo.map((info) => info.tabs)
+ //the windows info returns an array containing array of object of windows with properties such as tabs array 
+ // like this structure 
+ //let tabInfoAcrossWindows=[[{},{}],[{},{}]] 
+ let mergedTabInfo=tabsInfoAcrossWindows.flat(Infinity)
+ console.log("merged tabinfo is",mergedTabInfo);
+ return mergedTabInfo
 }
 
-getCurrentTab()
+
 // async function  always return promise we cautious while using it
 
 chrome.commands.onCommand.addListener((command) => {
@@ -48,15 +40,27 @@ chrome.commands.onCommand.addListener((command) => {
 
 function GetallTab()
 {
+// we gather active and unactivve tabs info first  
+//after that we try to create some tab which info we don,t have in our alltabpromise 
 let alltabsPromise=getCurrentTab()
+
+ chrome.tabs.create(
+            {
+                url:"https://instagram.com/whileddia"
+            }).then(() => console.log('tab is created')
+            ).catch(() => console.error('error occured')
+            )
+
 alltabsPromise.then(
     (restultofAlltab) => 
         {   
             console.log("the all tab are now at this time",restultofAlltab);
             
             let AlltabId=restultofAlltab.map(
-                (tabInfo) => tabInfo.id 
+                (tabInfo) => tabInfo.id
+                
             )
+            console.log("the all tab id is",AlltabId)
             removeAllActiveTab(AlltabId)
         }
             
@@ -70,25 +74,10 @@ chrome.tabs.remove(
 ).then(
     (response) => {
         console.log('tabs are cleared')
-        chrome.tabs.create(
-            {
-                url:"https://instagram.com/whileddia"
-            }
-        ).then(
-            (data) => console.log('tab is created')
-        ).catch(
-            () => console.error('error occured')
-        )
     }
 ).catch(
     (err) => console.error('something went wrong')
 )
 }
-// chrome.runtime.onInstalled.addListener(({reason}) => {
-//   if (reason === 'install') {
-//     chrome.tabs.create({
-//       url: "onboarding.html"
-//     });
-//   }
-// });
+
 
