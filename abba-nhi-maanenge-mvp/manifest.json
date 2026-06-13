@@ -6,7 +6,7 @@
     "service_worker": "service-worker.js",
     "type":"module"
   },
-  "permissions":["storage","tabs","activeTab"],
+  "permissions":["storage","tabs","activeTab","history"],
   "commands": {
     "panic-key": {
       "suggested_key": {
