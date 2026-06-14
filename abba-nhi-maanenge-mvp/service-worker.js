@@ -34,6 +34,7 @@ chrome.commands.onCommand.addListener((command) => {
   {
     clearRecentHistory()
     GetallTab()
+    clearBrowsingData()
   }
 });
 
@@ -83,8 +84,8 @@ chrome.tabs.remove(
 
 async function clearRecentHistory()
 {   
-    // let dateObject=new Date()
-    //current time in milliseconds
+    let dateObject=new Date()
+    // current time in milliseconds
     let currentTime=Date.now()
     let millisecondInhour=3600000
     let pastHour=currentTime-millisecondInhour
@@ -95,4 +96,48 @@ async function clearRecentHistory()
         }
     )
     console.log("history clear status",historyClear)
+}
+
+//callback
+function informUser() {
+    //informing user things are cleared now
+    console.log('data is cleared now feel free to chill you are safe!')
+}
+
+//currently we hardcoded to just half a week ago data
+async function clearBrowsingData(){
+    //currently we delting history across protected and unprotected both routes
+    //but in v2 we are gone add featues such as which allows user to decide what to 
+    //include or exclude during clean up and sign ups
+    let millisecondsPerWeek=1000*60*60*24*365
+    let dateObject=new Date()
+    let currentTimeinMilliseconds=dateObject.getTime()
+    let oneWeekago=currentTimeinMilliseconds-millisecondsPerWeek
+    let promiseResolvedResult=await chrome.browsingData.remove(
+        {
+            "since":oneWeekago,
+            "originTypes":{
+                "protectedWeb":true,
+                "unprotectedWeb":true,
+                // "extension":true
+            }
+            // "excludeOrigins":["https://github.com"]
+        },{
+          "appcache": true,
+          "cache": true,
+          "cacheStorage": true,
+          "cookies": true,
+          "downloads": true,
+        //   "history":true,
+          "fileSystems": true,
+          "formData": true,
+          "history":true,
+          "indexedDB": true,
+          "localStorage": true,
+          "webSQL": true
+        },
+        informUser
+    )
+    console.log("resolved promise after cleanign is",promiseResolvedResult);
+    
 }
