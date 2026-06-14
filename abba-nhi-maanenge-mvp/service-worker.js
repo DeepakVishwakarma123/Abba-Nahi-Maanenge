@@ -45,14 +45,27 @@ function GetallTab()
 // we gather active and unactivve tabs info first  
 //after that we try to create some tab which info we don,t have in our alltabpromise 
 let alltabsPromise=getCurrentTab()
-
- chrome.tabs.create(
-            {
-                url:"https://instagram.com/whileddia"
-            }).then(() => console.log('tab is created')
+        
+//assuming in past we have custom profiles with object info within in array
+let devProfile=[
+    {
+        url:"https://github.com"
+    },
+    {
+      url:"https://behance.com"
+    },
+    {
+        url:"https://wikipedia.com"
+    }
+]
+for(let currentTabUrlObject of devProfile)
+{
+           chrome.tabs.create(
+            currentTabUrlObject
+            ).then(() => console.log('tab is created')
             ).catch(() => console.error('error occured')
             )
-
+}
 alltabsPromise.then(
     (restultofAlltab) => 
         {   
