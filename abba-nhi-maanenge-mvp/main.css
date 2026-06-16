@@ -1,0 +1,46 @@
+body{
+    background-color:hsl(0, 100%, 30%);
+    width: 600px;
+}
+
+.outer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    gap: 10px;
+}
+
+.fixedCircle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: shadow 2s ease-in-out infinite normal;
+}
+
+@keyframes shadow {
+    0% {
+    box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(249, 226, 226, 0.7)
+  }
+}
+
+.hotKey{
+    font-size: 40px;
+    font-weight: bolder;
+    color: hsl(0, 0%,100%);
+}
+
+.hotProfile{
+     font-size: 40px;
+    font-weight: bolder;
+    color: hsl(0, 0%,100%);
+}
+
