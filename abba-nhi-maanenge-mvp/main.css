@@ -44,3 +44,30 @@ body{
     color: hsl(0, 0%,100%);
 }
 
+.btnRow{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+button{
+    cursor: pointer;
+}
+
+.sideMenu{
+    transition: all 0.9s ease;
+    background-color: purple;
+    top: 0;
+    right: -900px;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+}
+
+.moveToleft{
+    left: 50%;
+    right: 0;
+}
+
+.sideClosemain{ 
+    padding: 10px;
+}
