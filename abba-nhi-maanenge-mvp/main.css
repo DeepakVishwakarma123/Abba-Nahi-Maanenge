@@ -55,7 +55,7 @@ button{
 
 .sideMenu{
     transition: all 0.9s ease;
-    background-color: purple;
+    background-color: gray;
     top: 0;
     right: -900px;
     width: 50%;
@@ -71,3 +71,42 @@ button{
 .sideClosemain{ 
     padding: 10px;
 }
+
+.defaultSize{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.profileDataContainer{
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.nameSet{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.addButton{
+    padding: 10px;
+}
+
+input{
+    padding: 3px;
+}
+
+.error{
+    color: rgb(140, 36, 36);
+    display: none;
+}
+
+.copysection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
