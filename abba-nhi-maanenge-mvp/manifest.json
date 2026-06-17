@@ -9,7 +9,7 @@
     "service_worker": "service-worker.js",
     "type":"module"
   },
-  "permissions":["storage","tabs","history","browsingData"],
+  "permissions":["storage","tabs","history","browsingData","storage"],
   "commands": {
     "panic-key": {
       "suggested_key": {
