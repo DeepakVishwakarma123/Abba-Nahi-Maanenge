@@ -1,4 +1,4 @@
-import { saveProfileToLocal,devProfile,getProfileData } from "./Hooks/local-storage.js";
+import { saveProfileToLocal,getProfileData, AllProfiles } from "./Hooks/local-storage.js";
 
 // delete the tab single
 
@@ -19,7 +19,7 @@ import { saveProfileToLocal,devProfile,getProfileData } from "./Hooks/local-stor
 
 
 //saving default data to the local storage for default settings
-saveProfileToLocal("devProfiles",devProfile).then(
+saveProfileToLocal("AllProfiles",AllProfiles).then(
     () => {
         console.log("result saved successfully")
     }
@@ -62,26 +62,36 @@ function GetallTab()
 let alltabsPromise=getCurrentTab()
         
 //assuming in past we have custom profiles with object info within in array
-let devProfiles;
-getProfileData("devProfiles").then(
+let AllsavedProfiles;
+getProfileData("AllProfiles").then(
     (userProfiles) => {
         console.log("user profiles are",userProfiles);
         
-        devProfiles=userProfiles["devProfiles"]
-        console.log("devProfiles are",devProfiles);
-        for(let currentTabUrlObject of devProfiles)
+        AllsavedProfiles=userProfiles["AllProfiles"]
+        for(let currentTabUrlObject of AllsavedProfiles)
 {          
-           chrome.tabs.create(
-            currentTabUrlObject
-            ).then(() => console.log('tab is created')
+    if(currentTabUrlObject["isActive"])
+    {         
+
+               //creating current profile object to retrive its keys to access all customo url of each profile
+            let currentProfile=Object.keys(currentTabUrlObject)
+            //creating another loop to iterate overl all links
+            let currentProfileArray=currentTabUrlObject[currentProfile[0]]
+            for(let currentUrlObject of currentProfileArray)
+            {                
+               chrome.tabs.create(
+                currentUrlObject
+                ).then(() => console.log('tab is created')
             ).catch((error) => console.error(error)
-            )
+        )
+            }
+    }
 }
         
     }
 ).catch(
-    ()  => {
-        console.log("error happended");
+    (error)  => {
+        console.log("error happended",error);
         
     }
 )
