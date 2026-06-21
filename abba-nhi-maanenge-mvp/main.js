@@ -1,5 +1,9 @@
-  let buttonSetting=document.querySelector("#buttonSetting")
+import { saveProfileToLocal,AllProfiles,getProfileData } from "./Hooks/local-storage.js"
+
+
+let buttonSetting=document.querySelector("#buttonSetting")
   let closeButton=document.querySelector("#closeButton")
+
 
         let sideMenu=document.querySelector(".sideMenu")
         function moveToleft()
