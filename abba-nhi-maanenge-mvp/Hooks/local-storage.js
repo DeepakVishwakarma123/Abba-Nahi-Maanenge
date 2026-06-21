@@ -1,16 +1,25 @@
 // hook for saving data to local storage
 
-let devProfile=[
-    {
-        url:"https://github.com"
-    },
-    {
-      url:"https://behance.com"
-    },
-    {
-        url:"https://wikipedia.com"
-    }
-]
+let devProfiles={
+        
+"devProfiles":[
+        {
+            url:"https://github.com"
+        },
+        {
+          url:"https://behance.com"
+        },
+        {
+            url:"https://wikipedia.com"
+        }
+    ],
+    "isActive":true
+    
+}
+
+
+let AllProfiles=[devProfiles]
+
 
 
 async function saveProfileToLocal(key,value)
@@ -36,4 +45,4 @@ async function getProfileData(key) {
 }
 
 
-export {saveProfileToLocal,devProfile,getProfileData}
+export {saveProfileToLocal,AllProfiles,getProfileData}
