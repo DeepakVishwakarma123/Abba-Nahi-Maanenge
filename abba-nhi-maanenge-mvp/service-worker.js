@@ -1,3 +1,5 @@
+import { saveProfileToLocal,devProfile,getProfileData } from "./Hooks/local-storage.js";
+
 // delete the tab single
 
 // create a tab
@@ -13,6 +15,18 @@
 //        }
 //     }
 // )
+
+
+
+//saving default data to the local storage for default settings
+saveProfileToLocal("devProfiles",devProfile).then(
+    () => {
+        console.log("result saved successfully")
+    }
+).catch(
+    (error) => console.log("something happend")
+    
+)
 
 
 async function getCurrentTab() {
@@ -40,6 +54,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 
 
+
 function GetallTab()
 {
 // we gather active and unactivve tabs info first  
@@ -47,25 +62,31 @@ function GetallTab()
 let alltabsPromise=getCurrentTab()
         
 //assuming in past we have custom profiles with object info within in array
-let devProfile=[
-    {
-        url:"https://github.com"
-    },
-    {
-      url:"https://behance.com"
-    },
-    {
-        url:"https://wikipedia.com"
-    }
-]
-for(let currentTabUrlObject of devProfile)
-{
+let devProfiles;
+getProfileData("devProfiles").then(
+    (userProfiles) => {
+        console.log("user profiles are",userProfiles);
+        
+        devProfiles=userProfiles["devProfiles"]
+        console.log("devProfiles are",devProfiles);
+        for(let currentTabUrlObject of devProfiles)
+{          
            chrome.tabs.create(
             currentTabUrlObject
             ).then(() => console.log('tab is created')
-            ).catch(() => console.error('error occured')
+            ).catch((error) => console.error(error)
             )
 }
+        
+    }
+).catch(
+    ()  => {
+        console.log("error happended");
+        
+    }
+)
+
+
 alltabsPromise.then(
     (restultofAlltab) => 
         {   
