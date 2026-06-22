@@ -9,6 +9,8 @@ let addButton=document.querySelector(".addButton")
 let selectElement=document.querySelector(".selectProfile")
 let option=document.createElement("option")
 let sideMenu=document.querySelector(".sideMenu")
+let saveChoiceButton=document.querySelector(".saveChoice")
+
 
 
 
