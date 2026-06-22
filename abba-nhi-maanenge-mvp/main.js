@@ -10,36 +10,62 @@ let addButton=document.querySelector(".addButton")
 
 async function saveUrlToCurrentProfile()
 {    
-    let profileNameString=profileName.value
-    let userCustomUrl=url.value
-
-    console.log(profileNameString);
     
-
-
+    
+    
+    
+    
+    
+    let profileNameString=profileName.value
+    
+    let userCustomUrl=url.value
+    
     let urlObject={
         url:userCustomUrl
     }
+    
     let arrayOfUrlObjects=[]
     arrayOfUrlObjects.push(urlObject)
     let currentProfile={
         [profileNameString]:arrayOfUrlObjects,
         isActive:true
     }
-    console.log("current Profile is now",currentProfile);
+    
+    console.log(profileNameString);
+    
+
+//    basic structure is creating is here ends
+if(profileNameString==="" || userCustomUrl==="")
+{
+    console.error("name and url filled properly")
+    return
+}   
+
+//loop through on data to check whether profile exists or not
+//based on data add new field either update the old one with existing data
     
     let allProfileData;
     //first of all get the data
     let savedAllProfiles=await getProfileData("AllProfiles")
     allProfileData=savedAllProfiles["AllProfiles"]
+    //before pushing things whether profile is exist or not
+    for(let userCustomProfiles of allProfileData)
+    {
+        if(userCustomProfiles.hasOwnProperty(profileNameString))
+        {
+        //don,t push new whole object 
+        let arrayOfUrlObjects_inner=userCustomProfiles[profileNameString]
+        arrayOfUrlObjects_inner.push(urlObject)
+        //now save current whole object to storage again
+        await saveProfileToLocal("AllProfiles",allProfileData)
+        return
+        }
+    }
     allProfileData.push(currentProfile)
     //savign data to current storage 
-    console.log(allProfileData)
     saveProfileToLocal("AllProfiles",allProfileData).then(
         (res) => {
-            console.log(allProfileData);
-            
-            console.log("data saved succesfully",res);
+            console.log("data saved succesfully");
             
         }
     ).catch(
