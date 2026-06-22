@@ -55,6 +55,11 @@ if(profileNameString==="" || userCustomUrl==="")
         {
         //don,t push new whole object 
         let arrayOfUrlObjects_inner=userCustomProfiles[profileNameString]
+        if(arrayOfUrlObjects_inner.length===5)
+        {
+            console.error("max url per profile reached")
+            return
+        }
         arrayOfUrlObjects_inner.push(urlObject)
         //now save current whole object to storage again
         await saveProfileToLocal("AllProfiles",allProfileData)
