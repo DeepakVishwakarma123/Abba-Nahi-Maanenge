@@ -19,14 +19,28 @@ import { saveProfileToLocal,getProfileData, AllProfiles } from "./Hooks/local-st
 
 
 //saving default data to the local storage for default settings
-saveProfileToLocal("AllProfiles",AllProfiles).then(
-    () => {
-        console.log("result saved successfully")
-    }
-).catch(
-    (error) => console.log("something happend")
-    
-)
+
+async function savedDefaultData() {
+let defaultSavedData=await getProfileData("AllProfiles")
+console.log("default saved data",defaultSavedData);
+
+if(defaultSavedData)
+{
+    return 
+}
+else{
+     saveProfileToLocal("AllProfiles",AllProfiles).then(
+        () => {
+            console.log("result saved successfully")
+        }
+    ).catch(
+        (error) => console.log("something happend")
+        
+    )
+}   
+}
+
+savedDefaultData()
 
 
 async function getCurrentTab() {
