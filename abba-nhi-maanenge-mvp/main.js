@@ -8,7 +8,7 @@ let url=document.querySelector("#url")
 let addButton=document.querySelector(".addButton")
 
 
-function saveUrlToCurrentProfile()
+async function saveUrlToCurrentProfile()
 {    
     let profileNameString=profileName.value
     let userCustomUrl=url.value
@@ -18,7 +18,7 @@ function saveUrlToCurrentProfile()
 
 
     let urlObject={
-        [url]:userCustomUrl
+        url:userCustomUrl
     }
     let arrayOfUrlObjects=[]
     arrayOfUrlObjects.push(urlObject)
@@ -28,14 +28,29 @@ function saveUrlToCurrentProfile()
     }
     console.log("current Profile is now",currentProfile);
     
+    let allProfileData;
     //first of all get the data
-    let savedAllProfiles=getProfileData("AllProfiles")
-    savedAllProfiles.then(
-        (savedProfiles) => console.log("all saved Profiles are now",savedProfiles)
-        ).catch(
-            (err) => console.error("error",err)
-        )
+    let savedAllProfiles=await getProfileData("AllProfiles")
+    allProfileData=savedAllProfiles["AllProfiles"]
+    allProfileData.push(currentProfile)
+    //savign data to current storage 
+    console.log(allProfileData)
+    saveProfileToLocal("AllProfiles",allProfileData).then(
+        (res) => {
+            console.log(allProfileData);
+            
+            console.log("data saved succesfully",res);
+            
+        }
+    ).catch(
+        (err) => {
+            console.error("during saving error happended",err)
+        }
+    )
 }
+
+
+
 
 
 let sideMenu=document.querySelector(".sideMenu")
