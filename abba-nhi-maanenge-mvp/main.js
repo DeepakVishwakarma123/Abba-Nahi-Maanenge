@@ -6,16 +6,14 @@ let closeButton=document.querySelector("#closeButton")
 let profileName=document.querySelector("#profileName")
 let url=document.querySelector("#url")
 let addButton=document.querySelector(".addButton")
+let selectElement=document.querySelector(".selectProfile")
+let option=document.createElement("option")
+let sideMenu=document.querySelector(".sideMenu")
+
 
 
 async function saveUrlToCurrentProfile()
-{    
-    
-    
-    
-    
-    
-    
+{      
     let profileNameString=profileName.value
     
     let userCustomUrl=url.value
@@ -81,10 +79,6 @@ if(profileNameString==="" || userCustomUrl==="")
 }
 
 
-
-
-
-let sideMenu=document.querySelector(".sideMenu")
 function moveToleft()
 {
     sideMenu.classList.add('moveToleft')
