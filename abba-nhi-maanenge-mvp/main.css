@@ -88,7 +88,7 @@ button{
     padding: 14px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
 }
 
 .nameSet{
@@ -127,12 +127,26 @@ input{
 .urlPerProfile{
     background-color: white;
     display: flex;
-    gap: 20px;
-    padding:4px;
-    justify-content: center;
+    padding:6px;
+    width:100%;
     align-items: center;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    justify-content: space-between;
+    height:22px;
+}
+
+.deleteButton{
+    height: 20px;
+}
+
+.mainHolder{
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.saveChoice{
+    width: 100%;
+    padding: 10px;
 }
