@@ -77,6 +77,13 @@ button{
     font-weight: bold;
 }
 
+.defaultSizeIns{
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+
 .profileDataContainer{
     padding: 14px;
     display: flex;
@@ -110,3 +117,22 @@ input{
     gap: 10px;
 }
 
+.instructions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.urlPerProfile{
+    background-color: white;
+    display: flex;
+    gap: 20px;
+    padding:4px;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
