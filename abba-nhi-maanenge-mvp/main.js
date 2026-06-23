@@ -7,9 +7,13 @@ let profileName=document.querySelector("#profileName")
 let url=document.querySelector("#url")
 let addButton=document.querySelector(".addButton")
 let selectElement=document.querySelector(".selectProfile")
-let option=document.createElement("option")
 let sideMenu=document.querySelector(".sideMenu")
 let saveChoiceButton=document.querySelector(".saveChoice")
+let mainHolder=document.querySelector(".mainHolder")
+
+
+
+
 
 
 
@@ -28,7 +32,7 @@ async function saveUrlToCurrentProfile()
     arrayOfUrlObjects.push(urlObject)
     let currentProfile={
         [profileNameString]:arrayOfUrlObjects,
-        isActive:true
+        isActive:false
     }
     
     console.log(profileNameString);
@@ -80,6 +84,67 @@ if(profileNameString==="" || userCustomUrl==="")
     )
 }
 
+
+async function RenderProfiles() {
+    //get data form local storage
+   let userProfilesObject=await getProfileData("AllProfiles")
+   let userProfilesArray=userProfilesObject["AllProfiles"]
+   console.log(userProfilesArray);
+   
+   //refer the active Profiles
+   for(let profileDataObject of userProfilesArray)
+   {
+    console.log("test evey thi",profileDataObject);
+    
+    let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
+    let isActiveAdd=false
+    if(profileDataObject["isActive"])
+    {   
+        isActiveAdd=true
+        //creating a custom option tag which selected opton
+        console.log('keys',keysOfActiveProfileDataObject)
+        let option=document.createElement("option")
+        option.value=keysOfActiveProfileDataObject[0]
+        // text is not visible
+        console.log(option);
+        console.log(selectElement);
+               
+        //rendering active url's
+        let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
+        console.log('active all url',allUrlofActive);
+        
+        for(let linkAddressObject of allUrlofActive)
+        {   
+            let divboxofUrl=document.createElement("div")
+            let linkFullurl=document.createElement("p")
+            let deleteButton=document.createElement("button")
+            deleteButton.textContent="Delete"
+            divboxofUrl.classList.add('urlPerProfile')
+            deleteButton.classList.add('deleteButton')
+            deleteButton.classList.add('deleteButton')
+            let linkAddress=linkAddressObject["url"]
+            linkFullurl.textContent=linkAddress
+            divboxofUrl.appendChild(linkFullurl)
+            divboxofUrl.appendChild(deleteButton)
+            mainHolder.appendChild(divboxofUrl)
+        }
+    }
+    // if(isActiveAdd)
+    // {
+    //     console.log("hello");
+        
+    //     continue
+    // }
+   let option=document.createElement("option")
+    option.value=keysOfActiveProfileDataObject[0]
+    selectElement.appendChild(option)
+   }
+
+
+   console.log(userProfilesArray)
+}
+
+RenderProfiles()
 
 function moveToleft()
 {
