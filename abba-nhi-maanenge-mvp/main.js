@@ -12,18 +12,12 @@ let saveChoiceButton=document.querySelector(".saveChoice")
 let mainHolder=document.querySelector(".mainHolder")
 
 
-
-
-
-
-
-
 async function saveUrlToCurrentProfile()
 {      
     let profileNameString=profileName.value
     
     let userCustomUrl=url.value
-    
+    let urlLength=userCustomUrl.length    
     let urlObject={
         url:userCustomUrl
     }
@@ -35,15 +29,20 @@ async function saveUrlToCurrentProfile()
         isActive:false
     }
     
-    console.log(profileNameString);
-    
 
 //    basic structure is creating is here ends
 if(profileNameString==="" || userCustomUrl==="")
 {
     console.error("name and url filled properly")
     return
-}   
+}
+
+if(urlLength>22)
+{
+    console.error("Long Url Not Supported Add Short Url")
+    return
+}
+
 
 //loop through on data to check whether profile exists or not
 //based on data add new field either update the old one with existing data
@@ -74,8 +73,7 @@ if(profileNameString==="" || userCustomUrl==="")
     //savign data to current storage 
     saveProfileToLocal("AllProfiles",allProfileData).then(
         (res) => {
-            console.log("data saved succesfully");
-            
+            console.log("data saved succesfully");            
         }
     ).catch(
         (err) => {
@@ -89,35 +87,37 @@ async function RenderProfiles() {
     //get data form local storage
    let userProfilesObject=await getProfileData("AllProfiles")
    let userProfilesArray=userProfilesObject["AllProfiles"]
-   console.log(userProfilesArray);
    
    //refer the active Profiles
    for(let profileDataObject of userProfilesArray)
    {
-    console.log("test evey thi",profileDataObject);
-    
     let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
-    let isActiveAdd=false
+    let option=document.createElement("option")
+    option.value=keysOfActiveProfileDataObject[0]
+    option.text=keysOfActiveProfileDataObject[0]
+    option.label=keysOfActiveProfileDataObject[0]
+    if(profileDataObject["isActive"])
+    {
+        option.selected=true
+    }
+    selectElement.appendChild(option)
+}
+renderLinks()
+}
+
+
+async function renderLinks()
+{
+    
+   let userProfilesObject=await getProfileData("AllProfiles")
+   let userProfilesArray=userProfilesObject["AllProfiles"]
+    for(let profileDataObject of userProfilesArray)
+   {    
+    let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
+    let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
     if(profileDataObject["isActive"])
     {   
-        isActiveAdd=true
-        //creating a custom option tag which selected opton
-        console.log('keys',keysOfActiveProfileDataObject)
-        let option=document.createElement("option")
-        option.value=keysOfActiveProfileDataObject[0]
-        option.text=keysOfActiveProfileDataObject[0]
-        option.label=keysOfActiveProfileDataObject[0]
-        // text is not visible
-        console.log(option);
-        console.log(selectElement);
-        
-        selectElement.append(option)
-               
-        //rendering active url's
-        let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
-        console.log('active all url',allUrlofActive);
-        
-        for(let linkAddressObject of allUrlofActive)
+      for(let linkAddressObject of allUrlofActive)
         {   
             let divboxofUrl=document.createElement("div")
             let linkFullurl=document.createElement("p")
@@ -133,22 +133,43 @@ async function RenderProfiles() {
             mainHolder.appendChild(divboxofUrl)
         }
     }
-    if(isActiveAdd)
-    {
-        console.log("hello");
-        
-        continue
-    }
-   let option=document.createElement("option")
-    option.value=keysOfActiveProfileDataObject[0]
-    option.text=keysOfActiveProfileDataObject[0]
-      option.label=keysOfActiveProfileDataObject[0]
-    selectElement.appendChild(option)
-   }
-
-
-   console.log(userProfilesArray)
 }
+}
+
+
+async function updateActiveProfileState() {
+   
+   let userProfilesObject=await getProfileData("AllProfiles")
+   let userProfilesArray=userProfilesObject["AllProfiles"]
+   //converting html collection to array
+   let selectedOptionArray=Array.from(selectElement.selectedOptions)
+   let activeProfileonSelectionText=selectedOptionArray[0].textContent
+   for(let profileDataObject of userProfilesArray)
+   {
+    let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
+    //removing exisiting save Profile state
+    if(profileDataObject["isActive"])
+    {
+        profileDataObject["isActive"]=false
+    }
+    if(keysOfActiveProfileDataObject[0]===activeProfileonSelectionText)
+        {
+            profileDataObject["isActive"]=true
+        }
+   }
+   let resolvedState=await saveProfileToLocal("AllProfiles",userProfilesArray)
+   console.log("saved succesfully after update",resolvedState);
+   let childrenArray=Array.from(mainHolder.children)
+   for(let element of childrenArray)
+   {
+    element.remove()
+   }
+   renderLinks()
+}
+
+selectElement.addEventListener('change',updateActiveProfileState)
+
+// updateActiveProfileState()
 
 RenderProfiles()
 
