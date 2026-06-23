@@ -23,20 +23,24 @@ import { saveProfileToLocal,getProfileData, AllProfiles } from "./Hooks/local-st
 async function savedDefaultData() {
 let defaultSavedData=await getProfileData("AllProfiles")
 console.log("default saved data",defaultSavedData);
+let defaultSavedDataKeys=Object.keys(defaultSavedData)
+//key not present it return {} empty object
+//empty object doesn,t has keys show it .keys method will give us [] array
+//which help in detection to avoid problem
+if(defaultSavedDataKeys.length===0)
+{   
 
-if(defaultSavedData)
-{
-    return 
-}
-else{
-     saveProfileToLocal("AllProfiles",AllProfiles).then(
+    saveProfileToLocal("AllProfiles",AllProfiles).then(
         () => {
             console.log("result saved successfully")
         }
     ).catch(
         (error) => console.log("something happend")
         
-    )
+    )  
+}
+else{    
+    return 
 }   
 }
 
