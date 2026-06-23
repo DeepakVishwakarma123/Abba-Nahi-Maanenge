@@ -2,7 +2,6 @@ body{
     background-color:hsl(0, 100%, 30%);
     width: 600px;
 }
-
 .outer{
     display: flex;
     flex-direction: column;
@@ -11,7 +10,6 @@ body{
     padding: 60px;
     gap: 10px;
 }
-
 .fixedCircle{
     display: flex;
     justify-content: center;
