@@ -1,5 +1,4 @@
 // hook for saving data to local storage
-
 let devProfiles={
         
 "devProfiles":[
