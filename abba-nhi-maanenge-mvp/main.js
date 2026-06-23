@@ -105,9 +105,13 @@ async function RenderProfiles() {
         console.log('keys',keysOfActiveProfileDataObject)
         let option=document.createElement("option")
         option.value=keysOfActiveProfileDataObject[0]
+        option.text=keysOfActiveProfileDataObject[0]
+        option.label=keysOfActiveProfileDataObject[0]
         // text is not visible
         console.log(option);
         console.log(selectElement);
+        
+        selectElement.append(option)
                
         //rendering active url's
         let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
@@ -129,14 +133,16 @@ async function RenderProfiles() {
             mainHolder.appendChild(divboxofUrl)
         }
     }
-    // if(isActiveAdd)
-    // {
-    //     console.log("hello");
+    if(isActiveAdd)
+    {
+        console.log("hello");
         
-    //     continue
-    // }
+        continue
+    }
    let option=document.createElement("option")
     option.value=keysOfActiveProfileDataObject[0]
+    option.text=keysOfActiveProfileDataObject[0]
+      option.label=keysOfActiveProfileDataObject[0]
     selectElement.appendChild(option)
    }
 
