@@ -10,7 +10,11 @@ let selectElement=document.querySelector(".selectProfile")
 let sideMenu=document.querySelector(".sideMenu")
 let saveChoiceButton=document.querySelector(".saveChoice")
 let mainHolder=document.querySelector(".mainHolder")
+let hotProfile=document.querySelector(".hotProfile")
 
+
+
+renderActiveProfileOnmainPopUP()
 
 async function saveUrlToCurrentProfile()
 {      
@@ -209,6 +213,23 @@ async function updateActiveProfileState() {
     element.remove()
    }
    renderLinks()
+   renderActiveProfileOnmainPopUP()
+}
+
+
+async function renderActiveProfileOnmainPopUP() {
+   let userProfilesObject=await getProfileData("AllProfiles")
+   let userProfilesArray=userProfilesObject["AllProfiles"]
+   for(let profileDataObject of userProfilesArray)
+    {
+       let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
+    //removing exisiting save Profile state
+    if(profileDataObject["isActive"])
+    {
+        hotProfile.textContent=`${keysOfActiveProfileDataObject[0]} Loading`
+        break
+    }
+   }
 }
 
 selectElement.addEventListener('change',updateActiveProfileState)
