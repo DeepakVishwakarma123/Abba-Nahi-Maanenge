@@ -155,11 +155,15 @@ async function deleteProfileUrl(e) {
     {   
      for(let indexCount in allUrlofActive)
         {
-            if(allUrlofActive[indexCount]["url"]===UrlToDelete)
+            if(allUrlofActive[indexCount]["url"]===UrlToDelete && allUrlofActive.length>2)
             {
                 allUrlofActive.splice(indexCount,1)     
                 e.target.parentElement.remove()           
                 break;
+            }
+            else{
+                console.error('can not delete more than 3 url')
+                return   
             }
         } 
     }
