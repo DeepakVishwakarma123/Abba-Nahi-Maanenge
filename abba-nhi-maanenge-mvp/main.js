@@ -1,4 +1,4 @@
-import { saveProfileToLocal,AllProfiles,getProfileData } from "./Hooks/local-storage.js"
+import { saveProfileToLocal,AllProfiles,getProfileData,Toast } from "./Hooks/local-storage.js"
 
 
 let buttonSetting=document.querySelector("#buttonSetting")
@@ -32,13 +32,15 @@ async function saveUrlToCurrentProfile()
 
 //    basic structure is creating is here ends
 if(profileNameString==="" || userCustomUrl==="")
-{
+{   
+    Toast(true,'name or url is empty')
     console.error("name and url filled properly")
     return
 }
 
 if(urlLength>22)
-{
+{   
+    Toast(true,'Too long url')
     console.error("Long Url Not Supported Add Short Url")
     return
 }
@@ -59,13 +61,15 @@ if(urlLength>22)
         //don,t push new whole object 
         let arrayOfUrlObjects_inner=userCustomProfiles[profileNameString]
         if(arrayOfUrlObjects_inner.length===5)
-        {
+        {   
+            Toast(true,"maximum 5 url per profile limit reached")
             console.error("max url per profile reached")
             return
         }
         arrayOfUrlObjects_inner.push(urlObject)
         //now save current whole object to storage again
         await saveProfileToLocal("AllProfiles",allProfileData)
+        Toast(false,"url add to profile")         
         return
         }
     }
@@ -73,11 +77,13 @@ if(urlLength>22)
     //savign data to current storage 
     saveProfileToLocal("AllProfiles",allProfileData).then(
         (res) => {
-            console.log("data saved succesfully");            
+            console.log("data saved succesfully");   
+            Toast(false,"profile created")         
         }
     ).catch(
         (err) => {
             console.error("during saving error happended",err)
+            Toast(true,"something went wrong")
         }
     )
 }
@@ -158,11 +164,13 @@ async function deleteProfileUrl(e) {
             if(allUrlofActive[indexCount]["url"]===UrlToDelete && allUrlofActive.length>2)
             {
                 allUrlofActive.splice(indexCount,1)     
-                e.target.parentElement.remove()           
+                e.target.parentElement.remove()  
+                Toast(false,"url deleted")         
                 break;
             }
             else{
                 console.error('can not delete more than 3 url')
+                Toast(true,"max url delete limit reached")
                 return   
             }
         } 
@@ -194,6 +202,7 @@ async function updateActiveProfileState() {
    }
    let resolvedState=await saveProfileToLocal("AllProfiles",userProfilesArray)
    console.log("saved succesfully after update",resolvedState);
+   Toast(false,"active Profile changed")
    let childrenArray=Array.from(mainHolder.children)
    for(let element of childrenArray)
    {
