@@ -132,6 +132,39 @@ input{
     height:22px;
 }
 
+.toastSuccess{
+    background-color: rgba(134, 157, 126, 0.98);
+    border: 2px blue solid;
+    display: flex;
+    padding:6px;
+    width:100%;
+    align-items: center;
+    justify-content: space-between;
+    height:22px;
+    letter-spacing: 9px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.toastError{
+    background-color: rgba(159, 38, 32, 0.98);
+    border: 2px rgb(238, 7, 169) solid;
+    display: flex;
+    padding:6px;
+    width:100%;
+    align-items: center;
+    justify-content: space-between;
+    height:22px;
+    letter-spacing: 9px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+}
+
+
+
+
+
 .deleteButton{
     height: 20px;
 }
