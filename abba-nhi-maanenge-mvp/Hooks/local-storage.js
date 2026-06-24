@@ -17,11 +17,24 @@ let devProfiles={
 }
 
 
+
 let AllProfiles=[devProfiles]
 
 
 
-
+function Toast(isError,message)
+{   
+    let mainBox=document.createElement("div")
+    let sideMenu=document.querySelector(".sideClosemain")
+    isError?mainBox.classList.add("toastError"):mainBox.classList.add("toastSuccess")
+    mainBox.textContent=message
+    sideMenu.appendChild(mainBox)
+    setTimeout(
+        () => {
+            mainBox.remove()
+        },2000 
+    )
+}
 
 
 async function saveProfileToLocal(key,value)
@@ -47,4 +60,4 @@ async function getProfileData(key) {
 }
 
 
-export {saveProfileToLocal,AllProfiles,getProfileData}
+export {saveProfileToLocal,AllProfiles,getProfileData,Toast}
