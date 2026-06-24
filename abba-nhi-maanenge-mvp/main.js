@@ -126,6 +126,7 @@ async function renderLinks()
             divboxofUrl.classList.add('urlPerProfile')
             deleteButton.classList.add('deleteButton')
             deleteButton.classList.add('deleteButton')
+            deleteButton.addEventListener('click',deleteProfileUrl)
             let linkAddress=linkAddressObject["url"]
             linkFullurl.textContent=linkAddress
             divboxofUrl.appendChild(linkFullurl)
@@ -136,6 +137,36 @@ async function renderLinks()
 }
 }
 
+async function deleteProfileUrl(e) {
+  //grab the active profile at that time from select menu
+   let selectedOptionArray=Array.from(selectElement.selectedOptions)
+   let activeProfileonSelectionText=selectedOptionArray[0].textContent
+   let userProfilesObject=await getProfileData("AllProfiles")
+   let userProfilesArray=userProfilesObject["AllProfiles"]
+   let UrlToDelete=e.target.parentElement.firstElementChild.textContent
+     for(let profileDataObject of userProfilesArray)
+   {    
+    let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
+    let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
+    console.log(activeProfileonSelectionText);
+    
+    
+     if(keysOfActiveProfileDataObject[0]===activeProfileonSelectionText)
+    {   
+     for(let indexCount in allUrlofActive)
+        {
+            if(allUrlofActive[indexCount]["url"]===UrlToDelete)
+            {
+                allUrlofActive.splice(indexCount,1)     
+                e.target.parentElement.remove()           
+                break;
+            }
+        } 
+    }
+    let resolvedState=await saveProfileToLocal("AllProfiles",userProfilesArray)
+    console.log("deleted succesfully");
+}
+}
 
 async function updateActiveProfileState() {
    
