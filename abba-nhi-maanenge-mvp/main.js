@@ -37,14 +37,14 @@ async function saveUrlToCurrentProfile()
 //    basic structure is creating is here ends
 if(profileNameString==="" || userCustomUrl==="")
 {   
-    Toast(true,'name or url is empty')
+    Toast(true,'⚠️ Name/URL missing')
     console.error("name and url filled properly")
     return
 }
 
 if(urlLength>22)
 {   
-    Toast(true,'Too long url')
+    Toast(true,'⚠️ URL too long')
     console.error("Long Url Not Supported Add Short Url")
     return
 }
@@ -66,14 +66,14 @@ if(urlLength>22)
         let arrayOfUrlObjects_inner=userCustomProfiles[profileNameString]
         if(arrayOfUrlObjects_inner.length===5)
         {   
-            Toast(true,"maximum 5 url per profile limit reached")
+            Toast(true,"⚠️ Max 5 URLs allowed")
             console.error("max url per profile reached")
             return
         }
         arrayOfUrlObjects_inner.push(urlObject)
         //now save current whole object to storage again
         await saveProfileToLocal("AllProfiles",allProfileData)
-        Toast(false,"url add to profile")         
+        Toast(false,"✅ URL added")         
         return
         }
     }
@@ -82,7 +82,7 @@ if(urlLength>22)
     saveProfileToLocal("AllProfiles",allProfileData).then(
         (res) => {
             console.log("data saved succesfully");   
-            Toast(false,"profile created")         
+            Toast(false,"✅ Profile created")         
         }
     ).catch(
         (err) => {
@@ -169,12 +169,12 @@ async function deleteProfileUrl(e) {
             {
                 allUrlofActive.splice(indexCount,1)     
                 e.target.parentElement.remove()  
-                Toast(false,"url deleted")         
+                Toast(false,"✅ url deleted")         
                 break;
             }
             else{
-                console.error('can not delete more than 3 url')
-                Toast(true,"max url delete limit reached")
+                console.error('⚠️ Max 3 removals')
+                Toast(true,"⚠️ Max 3 removals")
                 return   
             }
         } 
@@ -206,7 +206,7 @@ async function updateActiveProfileState() {
    }
    let resolvedState=await saveProfileToLocal("AllProfiles",userProfilesArray)
    console.log("saved succesfully after update",resolvedState);
-   Toast(false,"active Profile changed")
+   Toast(false,"✅ Active profile changed")
    let childrenArray=Array.from(mainHolder.children)
    for(let element of childrenArray)
    {
