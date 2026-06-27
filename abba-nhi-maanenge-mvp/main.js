@@ -18,6 +18,7 @@ renderActiveProfileOnmainPopUP()
 
 async function saveUrlToCurrentProfile()
 {      
+    //no error in starting    
     let profileNameString=profileName.value
     
     let userCustomUrl=url.value
@@ -28,10 +29,14 @@ async function saveUrlToCurrentProfile()
     
     let arrayOfUrlObjects=[]
     arrayOfUrlObjects.push(urlObject)
+    
+    
     let currentProfile={
         [profileNameString]:arrayOfUrlObjects,
         isActive:false
     }
+
+    //code is running well till here
     
 
 //    basic structure is creating is here ends
@@ -55,42 +60,69 @@ if(urlLength>22)
     
     let allProfileData;
     //first of all get the data
+
     let savedAllProfiles=await getProfileData("AllProfiles")
+    console.log("ended");
+    console.log("saved all profile after retriving",savedAllProfiles);
+     
+    //things are write here
+    
+
+    //bug happening from this line find out it's cause
     allProfileData=savedAllProfiles["AllProfiles"]
     //before pushing things whether profile is exist or not
-    for(let userCustomProfiles of allProfileData)
-    {
-        if(userCustomProfiles.hasOwnProperty(profileNameString))
-        {
+    // for(let userCustomProfiles of allProfileData)
+    // {   
+    //     console.log("hello ritika we are inside it")
+     
+    //     console.log("pfoilen nam string",profileNameString);
+        
+    //     if(userCustomProfiles.hasOwnProperty(profileNameString))
+    //     {
+    //     console.log("goes here");
+        
+        
         //don,t push new whole object 
-        let arrayOfUrlObjects_inner=userCustomProfiles[profileNameString]
-        if(arrayOfUrlObjects_inner.length===5)
-        {   
-            Toast(true,"⚠️ Max 5 URLs allowed")
-            console.error("max url per profile reached")
-            return
-        }
-        arrayOfUrlObjects_inner.push(urlObject)
-        //now save current whole object to storage again
-        await saveProfileToLocal("AllProfiles",allProfileData)
-        Toast(false,"✅ URL added")         
-        return
-        }
-    }
+    //     let arrayOfUrlObjects_inner=userCustomProfiles[profileNameString]
+    //     if(arrayOfUrlObjects_inner.length===5)
+    //     {   
+    //         Toast(true,"⚠️ Max 5 URLs allowed")
+    //         console.error("max url per profile reached")
+    //         return
+    //     }
+        
+    //     arrayOfUrlObjects_inner.push(urlObject)
+    //     //now save current whole object to storage again
+    //     console.log("goes here");
+    //     await saveProfileToLocal("AllProfiles",allProfileData)
+    //     console.log("wati here");
+    //     Toast(false,"✅ URL added")         
+    //     return
+    //     } 
+    // }
+    console.log("hello all profile data is now",allProfileData);
+    console.log("hello current profile nwo",currentProfile);
     allProfileData.push(currentProfile)
+    console.log("hello all profile data is after add",allProfileData);
+    
+    
     //savign data to current storage 
-    saveProfileToLocal("AllProfiles",allProfileData).then(
-        (res) => {
-            console.log("data saved succesfully");   
-            Toast(false,"✅ Profile created")         
-        }
-    ).catch(
-        (err) => {
-            console.error("during saving error happended",err)
-            Toast(true,"something went wrong")
-        }
-    )
+    // saveProfileToLocal("AllProfiles",allProfileData).then(
+    //     (res) => {
+    //         console.log("data saved succesfully");   
+    //         Toast(false,"✅ Profile created")         
+    //     }
+    // ).catch(
+    //     (err) => {
+    //         console.error("during saving error happended",err)
+    //         Toast(true,"something went wrong")
+    //     }
+    // )
 }
+
+
+console.log("befor resolving things");
+
 
 
 async function RenderProfiles() {
