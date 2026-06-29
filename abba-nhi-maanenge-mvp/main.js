@@ -18,7 +18,7 @@ renderActiveProfileOnmainPopUP()
 
 async function saveUrlToCurrentProfile()
 {      
-    //no error in starting    
+  
     let profileNameString=profileName.value
     
     let userCustomUrl=url.value
@@ -29,29 +29,14 @@ async function saveUrlToCurrentProfile()
     
     let arrayOfUrlObjects=[]
     arrayOfUrlObjects.push(urlObject)
-
-
-    // let currentProfile=new Map()
-    // currentProfile.set(`${profileNameString}`,arrayOfUrlObjects)
-    // currentProfile.set("isActive",false)
-
-    
-    
     
     
     let currentProfile={}
-    console.log("curretn profile now",currentProfile);
     currentProfile[`${profileNameString}`]=arrayOfUrlObjects
     currentProfile["isActive"]=false
     
-    
-    console.log(Object.keys(currentProfile));
-    
-
-    //code is running well till here-----0000 
-    
-
 //    basic structure is creating is here ends
+
 if(profileNameString==="" || userCustomUrl==="")
 {   
     Toast(true,'⚠️ Name/URL missing')
@@ -71,14 +56,8 @@ if(urlLength>22)
 //based on data add new field either update the old one with existing data
     
     let allProfileData;
-    //first of all get the data
-
     let savedAllProfiles=await getProfileData("AllProfiles")
-        //things are write here
-    
-
-    //bug happening from this line find out it's cause
-    //shallow copy creating for avoid reference issues
+    //shallow copy to fix reference issues
     allProfileData=savedAllProfiles["AllProfiles"].slice()
     // before pushing things whether profile is exist or not
     for(let userCustomProfiles of allProfileData)
@@ -97,9 +76,7 @@ if(urlLength>22)
         
         arrayOfUrlObjects_inner.push(urlObject)
         //now save current whole object to storage again
-        console.log("goes here");
         await saveProfileToLocal("AllProfiles",allProfileData)
-        console.log("wati here");
         Toast(false,"✅ URL added")         
         return
         } 
@@ -122,10 +99,6 @@ if(urlLength>22)
         }
     )
 }
-
-
-console.log("befor resolving things");
-
 
 
 async function RenderProfiles() {
@@ -167,22 +140,18 @@ async function renderLinks()
    let userProfilesObject=await getProfileData("AllProfiles")
    let userProfilesArray=userProfilesObject["AllProfiles"]
     for(let profileDataObject of userProfilesArray)
-   {    
-    console.log(profileDataObject);
-    
+   {      
     let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
     let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
     if(keysOfActiveProfileDataObject[0]==="isActive")
     {
         allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[1]]
-        console.log("all url actvie is",allUrlofActive); 
+        
     }
     if(profileDataObject["isActive"])
     {   
       for(let linkAddressObject of allUrlofActive)
-        {   
-            console.log("hello hey here",linkAddressObject);
-            
+        {       
             let divboxofUrl=document.createElement("div")
             let linkFullurl=document.createElement("p")
             let deleteButton=document.createElement("button")
@@ -212,8 +181,6 @@ async function deleteProfileUrl(e) {
    {    
     let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
     let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
-    console.log(activeProfileonSelectionText);
-    
     //changin reference from 0 keys to 1 keys
     if(keysOfActiveProfileDataObject[0]==="isActive" && keysOfActiveProfileDataObject[1]===activeProfileonSelectionText)
     {
@@ -286,7 +253,6 @@ async function updateActiveProfileState() {
         }
    }
    let resolvedState=await saveProfileToLocal("AllProfiles",userProfilesArray)
-   console.log("saved succesfully after update",resolvedState);
    Toast(false,"✅ Active profile changed")
    let childrenArray=Array.from(mainHolder.children)
    for(let element of childrenArray)
