@@ -21,12 +21,10 @@ import { saveProfileToLocal,getProfileData, AllProfiles } from "./Hooks/local-st
 //saving default data to the local storage for default settings
 
 async function savedDefaultData() {
+    //key not present in local it return {} empty object
 let defaultSavedData=await getProfileData("AllProfiles")
 console.log("default saved data",defaultSavedData);
 let defaultSavedDataKeys=Object.keys(defaultSavedData)
-//key not present it return {} empty object
-//empty object doesn,t has keys show it .keys method will give us [] array
-//which help in detection to avoid problem
 if(defaultSavedDataKeys.length===0)
 {   
 
@@ -54,7 +52,6 @@ async function getCurrentTab() {
  // like this structure 
  //let tabInfoAcrossWindows=[[{},{}],[{},{}]] 
  let mergedTabInfo=tabsInfoAcrossWindows.flat(Infinity)
- console.log("merged tabinfo is",mergedTabInfo);
  return mergedTabInfo
 }
 
@@ -73,52 +70,52 @@ chrome.commands.onCommand.addListener((command) => {
 
 
 
-function GetallTab()
+async function GetallTab()
 {
 // we gather active and unactivve tabs info first  
-//after that we try to create some tab which info we don,t have in our alltabpromise 
+//after that we try to create some tab 
 let alltabsPromise=getCurrentTab()
-        
-//assuming in past we have custom profiles with object info within in array
 let AllsavedProfiles;
-getProfileData("AllProfiles").then(
-    (userProfiles) => {
-        console.log("user profiles are",userProfiles);
-        
-        AllsavedProfiles=userProfiles["AllProfiles"]
-        for(let currentTabUrlObject of AllsavedProfiles)
+let userProfiles=await getProfileData("AllProfiles")
+AllsavedProfiles=userProfiles["AllProfiles"]
+for(let currentTabUrlObject of AllsavedProfiles)
 {          
     if(currentTabUrlObject["isActive"])
     {         
 
-               //creating current profile object to retrive its keys to access all customo url of each profile
+               //creating current profile object to retrive its keys to access all custom url of each profile
             let currentProfile=Object.keys(currentTabUrlObject)
+            let currentProfileArray
             //creating another loop to iterate overl all links
-            let currentProfileArray=currentTabUrlObject[currentProfile[0]]
+            if(currentProfile[0]==="isActive")
+            {
+             currentProfileArray=currentTabUrlObject[currentProfile[1]]
+            }
+            else{
+                 currentProfileArray=currentTabUrlObject[currentProfile[0]]
+            }
             for(let currentUrlObject of currentProfileArray)
-            {                
-               chrome.tabs.create(
-                currentUrlObject
-                ).then(() => console.log('tab is created')
-            ).catch((error) => console.error(error)
-        )
+            {    
+                
+                try {
+             let wait=await chrome.tabs.create(
+                 currentUrlObject
+                )
+                console.log("tab is created");
+                
+            }
+            catch(err){
+                console.log("error happended");
+            }
             }
     }
 }
-        
-    }
-).catch(
-    (error)  => {
-        console.log("error happended",error);
-        
-    }
-)
+
 
 
 alltabsPromise.then(
     (restultofAlltab) => 
         {   
-            console.log("the all tab are now at this time",restultofAlltab);
             
             let AlltabId=restultofAlltab.map(
                 (tabInfo) => tabInfo.id
