@@ -29,14 +29,26 @@ async function saveUrlToCurrentProfile()
     
     let arrayOfUrlObjects=[]
     arrayOfUrlObjects.push(urlObject)
-    
-    
-    let currentProfile={
-        [profileNameString]:arrayOfUrlObjects,
-        isActive:false
-    }
 
-    //code is running well till here
+
+    // let currentProfile=new Map()
+    // currentProfile.set(`${profileNameString}`,arrayOfUrlObjects)
+    // currentProfile.set("isActive",false)
+
+    
+    
+    
+    
+    let currentProfile={}
+    console.log("curretn profile now",currentProfile);
+    currentProfile[`${profileNameString}`]=arrayOfUrlObjects
+    currentProfile["isActive"]=false
+    
+    
+    console.log(Object.keys(currentProfile));
+    
+
+    //code is running well till here-----0000 
     
 
 //    basic structure is creating is here ends
@@ -92,9 +104,14 @@ if(urlLength>22)
         return
         } 
     }
-    allProfileData.push(currentProfile)    
+    allProfileData.push(currentProfile)  
+    console.log(allProfileData);
+
+      
     saveProfileToLocal("AllProfiles",allProfileData).then(
         (res) => {
+            console.log(res);
+            
             console.log("data saved succesfully");   
             Toast(false,"✅ Profile created")         
         }
@@ -121,9 +138,19 @@ async function RenderProfiles() {
    {
     let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
     let option=document.createElement("option")
-    option.value=keysOfActiveProfileDataObject[0]
-    option.text=keysOfActiveProfileDataObject[0]
-    option.label=keysOfActiveProfileDataObject[0]
+    console.log(keysOfActiveProfileDataObject);
+
+    if(keysOfActiveProfileDataObject[0]==="isActive")
+    {
+    option.value=keysOfActiveProfileDataObject[1]
+    option.text=keysOfActiveProfileDataObject[1]
+    option.label=keysOfActiveProfileDataObject[1]
+    }else{
+        option.value=keysOfActiveProfileDataObject[0]
+        option.text=keysOfActiveProfileDataObject[0]
+        option.label=keysOfActiveProfileDataObject[0]
+    }
+    
     if(profileDataObject["isActive"])
     {
         option.selected=true
@@ -141,12 +168,21 @@ async function renderLinks()
    let userProfilesArray=userProfilesObject["AllProfiles"]
     for(let profileDataObject of userProfilesArray)
    {    
+    console.log(profileDataObject);
+    
     let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
     let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
+    if(keysOfActiveProfileDataObject[0]==="isActive")
+    {
+        allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[1]]
+        console.log("all url actvie is",allUrlofActive); 
+    }
     if(profileDataObject["isActive"])
     {   
       for(let linkAddressObject of allUrlofActive)
         {   
+            console.log("hello hey here",linkAddressObject);
+            
             let divboxofUrl=document.createElement("div")
             let linkFullurl=document.createElement("p")
             let deleteButton=document.createElement("button")
@@ -178,10 +214,30 @@ async function deleteProfileUrl(e) {
     let allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[0]]
     console.log(activeProfileonSelectionText);
     
+    //changin reference from 0 keys to 1 keys
+    if(keysOfActiveProfileDataObject[0]==="isActive" && keysOfActiveProfileDataObject[1]===activeProfileonSelectionText)
+    {
+        allUrlofActive=profileDataObject[keysOfActiveProfileDataObject[1]]
+          for(let indexCount in allUrlofActive)
+        {
+            if(allUrlofActive[indexCount]["url"]===UrlToDelete && allUrlofActive.length>2)
+            {
+                allUrlofActive.splice(indexCount,1)     
+                e.target.parentElement.remove()  
+                Toast(false,"✅ url deleted")         
+                break;
+            }
+            else{
+                console.error('⚠️ Max 3 removals')
+                Toast(true,"⚠️ Max 3 removals")
+                return   
+            }
+        } 
+    }
     
      if(keysOfActiveProfileDataObject[0]===activeProfileonSelectionText)
     {   
-     for(let indexCount in allUrlofActive)
+         for(let indexCount in allUrlofActive)
         {
             if(allUrlofActive[indexCount]["url"]===UrlToDelete && allUrlofActive.length>2)
             {
@@ -202,6 +258,8 @@ async function deleteProfileUrl(e) {
 }
 }
 
+
+
 async function updateActiveProfileState() {
    
    let userProfilesObject=await getProfileData("AllProfiles")
@@ -217,7 +275,12 @@ async function updateActiveProfileState() {
     {
         profileDataObject["isActive"]=false
     }
-    if(keysOfActiveProfileDataObject[0]===activeProfileonSelectionText)
+    if(keysOfActiveProfileDataObject[0]==="isActive" && keysOfActiveProfileDataObject[1]===activeProfileonSelectionText)
+    {  
+
+        profileDataObject["isActive"]=true
+    }
+       if(keysOfActiveProfileDataObject[0]===activeProfileonSelectionText)
         {
             profileDataObject["isActive"]=true
         }
@@ -240,11 +303,16 @@ async function renderActiveProfileOnmainPopUP() {
    let userProfilesArray=userProfilesObject["AllProfiles"]
    for(let profileDataObject of userProfilesArray)
     {
-       let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
+    let keysOfActiveProfileDataObject=Object.keys(profileDataObject)
     //removing exisiting save Profile state
     if(profileDataObject["isActive"])
-    {
-        hotProfile.textContent=`${keysOfActiveProfileDataObject[0]} Loading`
+    {   
+        if(keysOfActiveProfileDataObject[0]==="isActive")
+        {
+            hotProfile.textContent=`${keysOfActiveProfileDataObject[1]} Loading`
+        }else{
+            hotProfile.textContent=`${keysOfActiveProfileDataObject[0]} Loading`
+        }
         break
     }
    }
