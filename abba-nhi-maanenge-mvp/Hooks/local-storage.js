@@ -40,13 +40,9 @@ function Toast(isError,message)
 
 
 async function saveProfileToLocal(key,value)
-{   
-    console.log("saved run early i think so");
-    
+{    
     try {
-        let PromiseResolved=await chrome.storage.local.set({[key]:value})
-        console.log("setting is fast !!!!!!!!!!!!!!!!!!!!11");
-        
+        let PromiseResolved=await chrome.storage.local.set({[key]:value})    
         return PromiseResolved
     } catch (error) {
         return "Problem Occured While Saving"
@@ -56,12 +52,7 @@ async function saveProfileToLocal(key,value)
 
 async function getProfileData(key) {
     try {
-         console.log("test it out");
-         
         let savedProfile=await chrome.storage.local.get(`${key}`)
-
-        console.log("saved Profiles are",savedProfile["AllProfiles"]);
-        
         return savedProfile
     } catch (error) {
         return "Error At Retrival"
