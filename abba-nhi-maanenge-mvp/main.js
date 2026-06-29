@@ -275,9 +275,9 @@ async function renderActiveProfileOnmainPopUP() {
     {   
         if(keysOfActiveProfileDataObject[0]==="isActive")
         {
-            hotProfile.textContent=`${keysOfActiveProfileDataObject[1]} Loading`
+            hotProfile.textContent=`${keysOfActiveProfileDataObject[1]} Loaded`
         }else{
-            hotProfile.textContent=`${keysOfActiveProfileDataObject[0]} Loading`
+            hotProfile.textContent=`${keysOfActiveProfileDataObject[0]} Loaded`
         }
         break
     }
