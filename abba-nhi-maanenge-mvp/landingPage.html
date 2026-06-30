@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
 </head>
-<body class="bg-white">
+<body class="bg-white scroll-smooth">
     <div class="max-lg:collapse bg-base-200 border-b border-[#BE0037]  shadow-sm w-full ">
   <input id="navbar-1-toggle" class="peer hidden" type="checkbox" />
   <label for="navbar-1-toggle" class="fixed inset-0 hidden max-lg:peer-checked:block"></label>
@@ -25,13 +25,13 @@
     <div class="navbar-end hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li>
-            <a href="">NUCLEAR OPTIONS</a>
+            <a href="#nuclear">NUCLEAR OPTIONS</a>
         </li>
         <li>
-            <a href="">CAMOFLAGE</a>
+            <a href="#camoflage">CAMOFLAGE</a>
         </li>
         <li>
-            <a href="">PROFILE</a>
+            <a href="#profile">PROFILE</a>
         </li>
       </ul>
     </div>
@@ -77,7 +77,7 @@
 
 <!-- Nuclear Options section starts here -->
 
-<div class="bg-base-200  p-4">
+<div class="bg-base-200  p-4" id="nuclear">
     <!-- first row -->
      <div>
         <h2 class="font-bold text-2xl">Nuclear Options</h2>
@@ -151,7 +151,7 @@
 
 <!-- another section -->
 
-<div class="grid grid-cols-2 bg-black p-6">
+<div class="grid grid-cols-2 bg-black p-6" id="camoflage">
     <!-- first row -->
      <div class="flex flex-col gap-5 p-4">
          <div class="flex gap-5 bg-[#FFEDEC] justify-center  items-center rounded-full border border-[#FFB3B6] p-2 w-[35%]">
@@ -166,7 +166,7 @@
             </p>
         </div>
         <div class="flex gap-8">
-            <button class="btn bg-[#E11D48] text-white p-6">
+            <button class="btn btn-info text-white p-6">
                 <img src="./landingPageImage/flash.png" alt="" width="23px">
                 <p>https://google.com/search?q=excel+formulas</p>
             </button>
@@ -175,25 +175,25 @@
 
      <!-- second row -->
      <div>
-        <img src="./landingPageImage/stitch_panic_switcher/screen.png" alt="hero image">
+        <img src="./landingPageImage/michelle-ding-c7yBhz9XTIs-unsplash.jpg" alt="hero image">
      </div>
 </div>
 
 
 <!-- swithc to different profile -->
 
-<div class="p-4">
+<div class="p-4 bg-[#EFF1F3] flex gap-5 flex-col" id="profile">
     <h1 class="text-4xl font-semibold">Situational Awareness with Profiles</h1>
-    <p>Create multiple profiles to switch to different safe states depending on the situation. Different hotkeys can trigger different camouflage setups.</p>
+    <p>Create multiple profiles to switch to different safe states depending on the situation. <br> Different hotkeys can trigger different camouflage setups.</p>
 </div>
 
 <!-- main grid -->
-<div class="grid grid-cols-2 gap-4 bg-gray-500">
+<div class="grid grid-cols-2 gap-4 bg-[#EFF1F3]">
     <!-- first row -->
     <div class="grid grid-cols-2 gap-4 p-4">
        
         <!-- item one -->
-         <div class="flex justify-center items-center bg-base-200 border border-base-400 h-52">
+         <div class="flex justify-center items-center bg-[#C4C7C9] border border-gray-300 h-52">
             <div class="flex flex-col gap-2">
                 <img src="./landingPageImage/eradicate.png" alt="">
                 <p>Office</p>
@@ -201,7 +201,7 @@
          </div>
 
 
-           <div class="flex justify-center items-center bg-base-200 border border-base-400">
+           <div class="flex justify-center items-center border-2 text-[#E11D48] font-semibold border-[#E11D48]">
             <div class="flex flex-col gap-2">
                 <img src="./landingPageImage/eradicate.png" alt="">
                 <p>Office</p>
@@ -209,7 +209,7 @@
          </div>
 
 
-           <div class="flex justify-center items-center bg-base-200 border border-base-400 h-52">
+           <div class="flex justify-center items-center bg-[#A9ABAD] border border-gray-200 h-52">
             <div class="flex flex-col gap-2">
                 <img src="./landingPageImage/eradicate.png" alt="">
                 <p>Office</p>
@@ -217,7 +217,7 @@
          </div>
 
 
-           <div class="flex justify-center items-center bg-base-200 border border-base-400">
+           <div class="flex justify-center items-center bg-gray-200 border border-gray-100">
             <div class="flex flex-col gap-2">
                 <img src="./landingPageImage/eradicate.png" alt="">
                 <p>Office</p>
@@ -229,9 +229,15 @@
     <!-- second row -->
      <div class="flex flex-col justify-center">
         <div class="flex flex-col gap-5">
-           <p>Dedicated Url sets for every profile</p>
-           <p>Instantly Swithc Different Profile</p>
-           <p>Works Smooth Well And Fast</p>
+           <p class="flex gap-2">
+            <img src="./landingPageImage/checkmark.png" alt="checkmark image">
+            Dedicated Url sets for every profile</p>
+           <p class="flex gap-2">
+            <img src="./landingPageImage/checkmark.png" alt="checkmark image">
+            Instantly Swithc Different Profile</p>
+           <p class="flex gap-2">
+            <img src="./landingPageImage/checkmark.png" alt="checkmark image">
+            Works Smooth Well And Fast</p>
         </div>
      </div>
 </div>
