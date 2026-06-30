@@ -44,7 +44,7 @@
     <!-- first row -->
      <div class="flex flex-col gap-5 p-4">
          <div class="flex gap-5 bg-[#FFEDEC]  items-center rounded-full border border-[#FFB3B6] p-2 w-[35%]">
-        <img src="./landingPageImage/flash.png" alt="flash image" width="15px">
+        <img src="./landingPageImage/flash.png" class="animate-bounce" alt="flash image" width="15px">
         <p class="text-[#E11D48] font-extrabold text-xs tracking-widest">VERSION 1.1  NOW LIVE</p>
       </div>
        <div>
@@ -60,11 +60,11 @@
         <div class="flex gap-8">
             <button class="btn bg-[#E11D48] text-white p-6">ADD TO CHROME</button>
             <div class="flex items-center gap-4">
-                <kbd class="kbd kbd-xl p-6 shadow-lg shadow-base-400">Ctrl</kbd>
+                <kbd class="kbd kbd-xl p-6 shadow-lg shadow-base-400 animate-pulse">Ctrl</kbd>
                  +
-                 <kbd class="kbd kbd-xl p-6 shadow-lg shadow-base-400">Shift</kbd>
+                 <kbd class="kbd kbd-xl p-6 shadow-lg shadow-base-400 animate-bounce">Shift</kbd>
                  +
-                <kbd class="kbd kbd-xl p-6 shadow-lg shadow-base-400">1</kbd>
+                <kbd class="kbd kbd-xl p-6 shadow-lg shadow-base-400 animate-pulse">1</kbd>
             </div>
         </div>
      </div>
@@ -236,5 +236,71 @@
      </div>
 </div>
 
+<!-- swithc to different profile section ends here -->
+
+<!-- limitation section starts here -->
+<div class="flex justify-center items-center p-20 border-l-7 border-[#E11D48]">
+  <div class="flex flex-col gap-3">
+    <!-- first row heading -->
+     <h1 class="text-2xl font-extrabold">Transparency & Limitations</h1>
+     <ul class="flex flex-col gap-7">
+        <li>Does not remove recent search suggestion history (stored at account level).</li>
+        <li>Cannot close incognito windows due to Chrome API restrictions.</li>
+        <li>Works only within the Chrome environment; cannot clear OS-level files.</li>
+        <li>ShortCut Only Work When You are In Chrome</li>
+     </ul>
+  </div>
+</div>
+
+<!-- end of limitation section now from here -->
+
+<!-- start of platform display section -->
+<div class="flex justify-center items-center p-20 bg-[#000000]">
+  <div class="flex flex-col gap-11">
+    <!-- first row heading -->
+     <h1 class="text-5xl font-extrabold text-white">Ready To Secure Your Session</h1>
+     <div class="flex gap-2 justify-center">
+            <button class="btn bg-[#E11D48] text-white p-6 flex gap-4 border"> 
+                 <p class="animate-bounce">&#x2913</p>
+                ADD TO CHROME</button>
+            <button class="btn btn-primary p-6 flex gap-4"> 
+                 <p class="animate-bounce">&#127942</p>
+                UPVOTE ON PRODUCT HUNT</button>
+     </div>
+  </div>
+</div>
+
+
+<!-- copy right section -->
+   <div class="max-lg:collapse bg-base-200 border-b border-[#BE0037]  shadow-sm w-full ">
+  <input id="navbar-1-toggle" class="peer hidden" type="checkbox" />
+  <label for="navbar-1-toggle" class="fixed inset-0 hidden max-lg:peer-checked:block"></label>
+  <div class="collapse-title navbar">
+    <div class="navbar-start">
+      <label for="navbar-1-toggle" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+      </label>
+      <button class="btn btn-ghost text-xl text-[#E11D48]">
+        Panic Key
+    <p>&#169 2026 ALL RIGHTS RESERVED</p>
+    </button>
+    </div>
+    <div class="navbar-end hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li>
+            <a href="">CHROME WEB STORE</a>
+        </li>
+        <li>
+            <a href="">PRODUCT HUNT</a>
+        </li>
+        <li>
+            <a href="mailto:focusdreammern@gmail.com">CONTACT</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+ 
 </body>
 </html>
