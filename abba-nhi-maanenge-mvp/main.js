@@ -113,6 +113,9 @@ if(urlLength>22)
     }
     
     selectElement.append(option)
+
+    profileName.value=""
+    url.value=""
                 
 
         }
