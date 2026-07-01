@@ -90,8 +90,31 @@ if(urlLength>22)
             console.log(res);
             
             console.log("data saved succesfully");   
-            Toast(false,"✅ Profile created")       
-            RenderProfiles()  
+            Toast(false,"✅ Profile created")
+            
+      
+      
+      let lastElement=allProfileData[allProfileData.length-1]
+      console.log("last elemetn is",lastElement);
+
+    let option=document.createElement("option")
+    let keysOfActiveProfileDataObject=Object.keys(lastElement)
+    console.log(keysOfActiveProfileDataObject);
+
+    if(keysOfActiveProfileDataObject[0]==="isActive")
+    {
+    option.value=keysOfActiveProfileDataObject[1]
+    option.text=keysOfActiveProfileDataObject[1]
+    option.label=keysOfActiveProfileDataObject[1]
+    }else{
+        option.value=keysOfActiveProfileDataObject[0]
+        option.text=keysOfActiveProfileDataObject[0]
+        option.label=keysOfActiveProfileDataObject[0]
+    }
+    
+    selectElement.append(option)
+                
+
         }
     ).catch(
         (err) => {
