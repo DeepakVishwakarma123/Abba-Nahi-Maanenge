@@ -2,7 +2,6 @@ import { saveProfileToLocal,getProfileData, AllProfiles } from "./Hooks/local-st
 
 // delete the tab single
 
-// create a tab
 // chrome.runtime.onInstalled.addListener(
 //     (object) => {
 //        if(object["reason"]==="install")
