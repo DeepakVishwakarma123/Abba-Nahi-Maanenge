@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Abba nhi Maanenge",
+  "name": "Panic Key",
   "version": "1.0.0",
   "action":{
     "default_popup": "./index.html"
@@ -27,5 +27,11 @@
       },
       "description": "opne me"
     }
-  }
+  },
+   "icons":{
+      "16":"./icons/i16.png",
+      "32":"./icons/i32.png",
+      "48":"./icons/i48.png",
+      "128":"./icons/i128.png"
+    }
 }
