@@ -90,7 +90,8 @@ if(urlLength>22)
             console.log(res);
             
             console.log("data saved succesfully");   
-            Toast(false,"✅ Profile created")         
+            Toast(false,"✅ Profile created")       
+            RenderProfiles()  
         }
     ).catch(
         (err) => {
